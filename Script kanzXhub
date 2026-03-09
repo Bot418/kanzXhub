@@ -1,0 +1,417 @@
+--[[
+	KAMUS SAMBANG KATA - AKHIRAN LY, CY, GY
+]]
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+local guiParent = pcall(function() return CoreGui.Name end) and CoreGui or Players.LocalPlayer:WaitForChild("PlayerGui")
+
+if guiParent:FindFirstChild("KamusSambangKata") then
+    guiParent.KamusSambangKata:Destroy()
+end
+
+-- [ GUI ]
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "KamusSambangKata"
+ScreenGui.Parent = guiParent
+ScreenGui.ResetOnSpawn = false
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 360, 0, 460)
+MainFrame.Position = UDim2.new(0.5, -180, 0.5, -230)
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 36)
+MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+MainFrame.Parent = ScreenGui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 12)
+UICorner.Parent = MainFrame
+
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 40)
+Header.BackgroundColor3 = Color3.fromRGB(124, 58, 237)
+Header.BorderSizePixel = 0
+Header.Active = true
+Header.Parent = MainFrame
+
+local HeaderCorner = Instance.new("UICorner")
+HeaderCorner.CornerRadius = UDim.new(0, 12)
+HeaderCorner.Parent = Header
+
+local HeaderFix = Instance.new("Frame")
+HeaderFix.Size = UDim2.new(1, 0, 0, 10)
+HeaderFix.Position = UDim2.new(0, 0, 1, -10)
+HeaderFix.BackgroundColor3 = Color3.fromRGB(124, 58, 237)
+HeaderFix.BorderSizePixel = 0
+HeaderFix.Parent = Header
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -40, 1, 0)
+Title.Position = UDim2.new(0, 15, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "AKHIRAN LY, CY, GY"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 14
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = Header
+
+local CloseBtn = Instance.new("TextButton")
+CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+CloseBtn.Position = UDim2.new(1, -35, 0, 5)
+CloseBtn.BackgroundTransparency = 1
+CloseBtn.Text = "X"
+CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseBtn.Font = Enum.Font.GothamBold
+CloseBtn.TextSize = 16
+CloseBtn.Parent = Header
+
+CloseBtn.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+local SearchBox = Instance.new("TextBox")
+SearchBox.Size = UDim2.new(1, -30, 0, 40)
+SearchBox.Position = UDim2.new(0, 15, 0, 55)
+SearchBox.BackgroundColor3 = Color3.fromRGB(45, 45, 53)
+SearchBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBox.PlaceholderText = "Ketik awalan kata disini..."
+SearchBox.Font = Enum.Font.Gotham
+SearchBox.TextSize = 14
+SearchBox.ClearTextOnFocus = false
+SearchBox.Parent = MainFrame
+
+local SearchCorner = Instance.new("UICorner")
+SearchCorner.CornerRadius = UDim.new(0, 8)
+SearchCorner.Parent = SearchBox
+
+local ResetBtn = Instance.new("TextButton")
+ResetBtn.Size = UDim2.new(0, 100, 0, 30)
+ResetBtn.Position = UDim2.new(0, 15, 0, 105)
+ResetBtn.BackgroundColor3 = Color3.fromRGB(220, 38, 38)
+ResetBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ResetBtn.Text = "Reset"
+ResetBtn.Font = Enum.Font.GothamBold
+ResetBtn.TextSize = 12
+ResetBtn.Parent = MainFrame
+
+local ResetCorner = Instance.new("UICorner")
+ResetCorner.CornerRadius = UDim.new(0, 6)
+ResetCorner.Parent = ResetBtn
+
+local BackspaceBtn = Instance.new("TextButton")
+BackspaceBtn.Size = UDim2.new(0, 110, 0, 30)
+BackspaceBtn.Position = UDim2.new(0, 125, 0, 105)
+BackspaceBtn.BackgroundColor3 = Color3.fromRGB(249, 115, 22)
+BackspaceBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+BackspaceBtn.Text = "Hapus Cepat"
+BackspaceBtn.Font = Enum.Font.GothamBold
+BackspaceBtn.TextSize = 11
+BackspaceBtn.Parent = MainFrame
+
+local BackspaceCorner = Instance.new("UICorner")
+BackspaceCorner.CornerRadius = UDim.new(0, 6)
+BackspaceCorner.Parent = BackspaceBtn
+
+local autoEnterEnabled = true
+local AutoEnterBtn = Instance.new("TextButton")
+AutoEnterBtn.Size = UDim2.new(0, 95, 0, 30)
+AutoEnterBtn.Position = UDim2.new(0, 245, 0, 105)
+AutoEnterBtn.BackgroundColor3 = Color3.fromRGB(16, 185, 129)
+AutoEnterBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoEnterBtn.Text = "Enter: ON"
+AutoEnterBtn.Font = Enum.Font.GothamBold
+AutoEnterBtn.TextSize = 12
+AutoEnterBtn.Parent = MainFrame
+
+local AutoEnterCorner = Instance.new("UICorner")
+AutoEnterCorner.CornerRadius = UDim.new(0, 6)
+AutoEnterCorner.Parent = AutoEnterBtn
+
+AutoEnterBtn.MouseButton1Click:Connect(function()
+    autoEnterEnabled = not autoEnterEnabled
+    if autoEnterEnabled then
+        AutoEnterBtn.Text = "Enter: ON"
+        AutoEnterBtn.BackgroundColor3 = Color3.fromRGB(16, 185, 129)
+    else
+        AutoEnterBtn.Text = "Enter: OFF"
+        AutoEnterBtn.BackgroundColor3 = Color3.fromRGB(107, 114, 128)
+    end
+end)
+
+local StatusLabel = Instance.new("TextLabel")
+StatusLabel.Size = UDim2.new(1, -30, 0, 20)
+StatusLabel.Position = UDim2.new(0, 15, 0, 142)
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Text = "Memuat kata akhiran LY, CY, GY..."
+StatusLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+StatusLabel.Font = Enum.Font.Gotham
+StatusLabel.TextSize = 12
+StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+StatusLabel.Parent = MainFrame
+
+local ResultList = Instance.new("ScrollingFrame")
+ResultList.Size = UDim2.new(1, -30, 1, -180)
+ResultList.Position = UDim2.new(0, 15, 0, 165)
+ResultList.BackgroundTransparency = 1
+ResultList.ScrollBarThickness = 6
+ResultList.ScrollBarImageColor3 = Color3.fromRGB(124, 58, 237)
+ResultList.Parent = MainFrame
+
+local ListLayout = Instance.new("UIListLayout")
+ListLayout.Padding = UDim.new(0, 5)
+ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ListLayout.Parent = ResultList
+
+-- [ DRAG ]
+local dragging, dragInput, dragStart, startPos
+
+Header.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+Header.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+-- [ RAPID BACKSPACE ]
+local isBackspacing = false
+
+local function stopBackspace()
+    isBackspacing = false
+end
+
+BackspaceBtn.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isBackspacing = true
+        task.spawn(function()
+            while isBackspacing do
+                pcall(function()
+                    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Backspace, false, game)
+                    task.wait(0.01)
+                    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Backspace, false, game)
+                end)
+                task.wait(0.02)
+            end
+        end)
+    end
+end)
+
+BackspaceBtn.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        stopBackspace()
+    end
+end)
+BackspaceBtn.MouseLeave:Connect(stopBackspace)
+
+-- [ SIMULASI KETIK ]
+local function simulateTyping(word)
+    for i = 1, #word do
+        local char = string.upper(string.sub(word, i, i))
+        local success, keyCode = pcall(function() return Enum.KeyCode[char] end)
+        if success and keyCode then
+            pcall(function()
+                VirtualInputManager:SendKeyEvent(true, keyCode, false, game)
+                task.wait(0.01)
+                VirtualInputManager:SendKeyEvent(false, keyCode, false, game)
+            end)
+            task.wait(0.02)
+        end
+    end
+    
+    if autoEnterEnabled then
+        task.wait(0.05)
+        pcall(function()
+            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.Return, false, game)
+            task.wait(0.01)
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.Return, false, game)
+        end)
+    end
+end
+
+-- [ DATABASE AKHIRAN LY, CY, GY ]
+local wordsDatabase = {
+    -- AKHIRAN LY
+    "assertedly", "billy", "bily", "diddly", "disproportionally", "errorlessly", 
+    "expansively", "neighbourly", "overabundantly", "piddly", "resumply", "retailly", 
+    "sandfly", "secondly", "separably", "westwardly",
+    
+    -- AKHIRAN CY
+    "arrogancy", "corpulency", "delegitmacy", "excellency", "incompetency", "nonlegitmacy", 
+    "supremacy", "prodemocracy", "recalcitracy", "insurgency", "verdancy",
+    
+    -- AKHIRAN GY
+    "anaesthesiology", "buggy", "cosmology", "oceanology", "paleontropology", 
+    "pathology", "seismology", "otourology"
+}
+
+table.sort(wordsDatabase, function(a, b) return #a > #b end)
+StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (LY, CY, GY)."
+local usedWords = {}
+
+-- [ LOGIKA ITEM & UI ]
+local function clearResults()
+    for _, child in pairs(ResultList:GetChildren()) do
+        if child:IsA("Frame") or child:IsA("TextButton") then
+            child:Destroy()
+        end
+    end
+end
+
+local function createWordItem(word)
+    local ItemFrame = Instance.new("Frame")
+    ItemFrame.Size = UDim2.new(1, -10, 0, 35)
+    ItemFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 53)
+    ItemFrame.BorderSizePixel = 0
+    ItemFrame.Parent = ResultList
+
+    local ItemCorner = Instance.new("UICorner")
+    ItemCorner.CornerRadius = UDim.new(0, 6)
+    ItemCorner.Parent = ItemFrame
+
+    local MainBtn = Instance.new("TextButton")
+    MainBtn.Size = UDim2.new(1, -165, 1, 0)
+    MainBtn.BackgroundTransparency = 1
+    
+    if usedWords[word] then
+        MainBtn.Text = "  [TERPAKAI] " .. word
+        MainBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
+        ItemFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+    else
+        MainBtn.Text = "  " .. word
+        MainBtn.TextColor3 = Color3.fromRGB(230, 230, 230)
+    end
+    
+    MainBtn.Font = Enum.Font.GothamSemibold
+    MainBtn.TextSize = 14
+    MainBtn.TextXAlignment = Enum.TextXAlignment.Left
+    MainBtn.Parent = ItemFrame
+
+    local function markAsUsed()
+        usedWords[word] = true
+        MainBtn.Text = "  [TERPAKAI] " .. word
+        MainBtn.TextColor3 = Color3.fromRGB(150, 150, 150)
+        ItemFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+    end
+
+    MainBtn.MouseButton1Click:Connect(function()
+        if usedWords[word] then return end 
+
+        MainBtn.Text = "  [Mengetik...] " .. word
+        MainBtn.TextColor3 = Color3.fromRGB(167, 139, 250)
+        
+        simulateTyping(word)
+        
+        task.wait(0.2)
+        if MainBtn then
+            markAsUsed()
+        end
+    end)
+
+    local ActionFrame = Instance.new("Frame")
+    ActionFrame.Size = UDim2.new(0, 155, 1, 0)
+    ActionFrame.Position = UDim2.new(1, -160, 0, 0)
+    ActionFrame.BackgroundTransparency = 1
+    ActionFrame.Parent = ItemFrame
+
+    local ActionLayout = Instance.new("UIListLayout")
+    ActionLayout.FillDirection = Enum.FillDirection.Horizontal
+    ActionLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+    ActionLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+    ActionLayout.Padding = UDim.new(0, 4)
+    ActionLayout.Parent = ActionFrame
+
+    local function createCutButton(amount)
+        if #word <= amount then return end
+        
+        local CutBtn = Instance.new("TextButton")
+        CutBtn.Size = UDim2.new(0, 26, 0, 24)
+        CutBtn.BackgroundColor3 = Color3.fromRGB(65, 65, 75)
+        CutBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+        CutBtn.Text = "-"..amount
+        CutBtn.Font = Enum.Font.GothamBold
+        CutBtn.TextSize = 11
+        CutBtn.Parent = ActionFrame
+
+        local CutCorner = Instance.new("UICorner")
+        CutCorner.CornerRadius = UDim.new(0, 4)
+        CutCorner.Parent = CutBtn
+
+        CutBtn.MouseButton1Click:Connect(function()
+            if usedWords[word] then return end 
+
+            CutBtn.BackgroundColor3 = Color3.fromRGB(124, 58, 237)
+            CutBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+            
+            local cutWord = string.sub(word, amount + 1)
+            simulateTyping(cutWord)
+            
+            task.wait(0.2)
+            if CutBtn then
+                CutBtn.BackgroundColor3 = Color3.fromRGB(65, 65, 75)
+                CutBtn.TextColor3 = Color3.fromRGB(200, 200, 200)
+                markAsUsed()
+            end
+        end)
+    end
+
+    createCutButton(1)
+    createCutButton(2)
+    createCutButton(3)
+    createCutButton(4)
+    createCutButton(5)
+end
+
+-- [ PENCARIAN ]
+local function doSearch()
+    local query = string.lower(SearchBox.Text)
+    clearResults()
+    
+    if query == "" then
+        StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (LY, CY, GY)."
+        ResultList.CanvasSize = UDim2.new(0, 0, 0, 0)
+        return
+    end
+
+    local count = 0
+    for _, word in ipairs(wordsDatabase) do
+        if string.sub(word, 1, #query) == query then
+            createWordItem(word)
+            count = count + 1
+            if count >= 100 then break end
+        end
+    end
+
+    StatusLabel.Text = "Ditemukan: " .. tostring(count) .. (count >= 100 and "+ (Terbatas 100)" or " kata")
+    ResultList.CanvasSize = UDim2.new(0, 0, 0, count * 40)
+end
+
+SearchBox:GetPropertyChangedSignal("Text"):Connect(doSearch)
+
+ResetBtn.MouseButton1Click:Connect(function()
+    usedWords = {}
+    doSearch()
+end)
