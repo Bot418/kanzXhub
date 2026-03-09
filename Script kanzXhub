@@ -1,5 +1,5 @@
 --[[
-	KAMUS SAMBANG KATA - AKHIRAN LY, CY, GY
+	KAMUS SAMBANG KATA - AKHIRAN ISME (KBBI)
 ]]
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
@@ -53,7 +53,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, -40, 1, 0)
 Title.Position = UDim2.new(0, 15, 0, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "AKHIRAN LY, CY, GY"
+Title.Text = "AKHIRAN ISME (KBBI)"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 14
@@ -147,7 +147,7 @@ local StatusLabel = Instance.new("TextLabel")
 StatusLabel.Size = UDim2.new(1, -30, 0, 20)
 StatusLabel.Position = UDim2.new(0, 15, 0, 142)
 StatusLabel.BackgroundTransparency = 1
-StatusLabel.Text = "Memuat kata akhiran LY, CY, GY..."
+StatusLabel.Text = "Memuat kata akhiran ISME..."
 StatusLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
 StatusLabel.Font = Enum.Font.Gotham
 StatusLabel.TextSize = 12
@@ -252,24 +252,41 @@ local function simulateTyping(word)
     end
 end
 
--- [ DATABASE AKHIRAN LY, CY, GY ]
+-- [ DATABASE AKHIRAN ISME (KBBI) - LENGKAP ]
 local wordsDatabase = {
-    -- AKHIRAN LY
-    "assertedly", "billy", "bily", "diddly", "disproportionally", "errorlessly", 
-    "expansively", "neighbourly", "overabundantly", "piddly", "resumply", "retailly", 
-    "sandfly", "secondly", "separably", "westwardly",
-    
-    -- AKHIRAN CY
-    "arrogancy", "corpulency", "delegitmacy", "excellency", "incompetency", "nonlegitmacy", 
-    "supremacy", "prodemocracy", "recalcitracy", "insurgency", "verdancy",
-    
-    -- AKHIRAN GY
-    "anaesthesiology", "buggy", "cosmology", "oceanology", "paleontropology", 
-    "pathology", "seismology", "otourology"
+    "isisme", "absenteisme", "absolutisme", "absurdisme", "aforisme", "agnostisisme", "aktivisme", 
+    "albinisme", "alkoholisme", "alomerisme", "altruisme", "amatirisme", "amensalisme", "amfibolisme", "anabolisme", 
+    "anakronisme", "anarkisme", "aneurisme", "animisme", "antagonisme", "antisemitisme", "antropomorfisme", "antroposentrisme", 
+    "antusiasme", "aheliotrpisime", "arkaisme", "asketisisme", "atavisme", "ateisme", "autisme", "banditisme", 
+    "bapakisme", "barbarisme", "bebekisme", "bilateralisme", "bilingualisme", "bipolisentriisme", "birokraitisme", "blabitisme", 
+    "botulisme", "bromisme", "brutalisme", "buddhisme", "dadaisme", "daerahisme", "daltonisme", "defaitisme", 
+    "deisme", "despotisme", "determinisme", "diamagnetisme", "dikroisme", "dimorfisme", "dinamisme", "dismembrasia", 
+    "dismenorea", "dogmatisme", "dualisme", "durnoisme", "eksotisme", "ekspansionisme", "ekspresionisme", "ekumenisme", 
+    "elektromagnetisme", "embolisme", "emosionalisme", "empirisme", "energi", "erosentriisme", "erotisisme", "erotisme", 
+    "eskapisme", "etatisme", "etnoseentriisme", "eudaemonisme", "eufemisme", "evolusionisme", "familisme", "fanatisme", 
+    "fasisme", "fatalisme", "favoritisme", "federalisme", "feminisme", "fenomenalisme", "feodalisime", "feromagnetisme", 
+    "fotoperiodisme", "fundamentalisme", "fungsionalisme", "futurisme", "gigantisme", "globalisme", "gradualisme", "hedonisme", 
+    "hegelianisme", "hegemonisme", "heliotropisme", "henoteisme", "hermafroditisme", "heroisme", "hinduisme", "hipnotisme", 
+    "hipopituitarisme", "hipotiroidisme", "hirsutisme", "historisisme", "holisme", "homoseksualisme", "humanisme", "idealisme", 
+    "ikhtiosarkotoksisme", "ikhtiotoksisme", "ikonoklasme", "imperialisme", "impresionisme", "indeterminisme", "individualisme", 
+    "infantilisme", "intelektualisme", "interventionisme", "islamisme", "isokronisme", "isolasionisme", "isomorfisme",
+    "retreatisme", "romantisisme", "sadisme", "sarkasme", "sauviniisme", "sektarianisme", "sekularisme", "semitisme", 
+    "sensualisme", "separatisme", "silogisme", "simbolisme", "sindikalisme", "sinergisme", "sinisme", "sinkretisme", 
+    "sinkronisme", "skeptisisme", "skolastisisme", "smes", "snobisme", "sodomasosisme", "sofisme", "solipsisme", 
+    "somnambulisme", "sosialisme", "spiritisme", "spiritualisme", "stalinisme", "stereoisomerisme", "struktur", "strukturalisme", 
+    "subjektivisme", "subyektivisme", "sufisme", "sukuisme", "superlativisme", "surealisme", "syamanisme", "takisme", 
+    "tantrisme", "taoisme", "tarantisme", "tautomerisme", "teisme", "teknokratisme", "teori", "terrorisme", "totaliterisme", 
+    "totemisme", "tradisionalisme", "transvetisme", "trauma", "tropisme", "turisme", "unitarisme", "universalisme", 
+    "uranisme", "urbanisme", "utopisme", "vandalisme", "vegetarisme", "verbalisme", "veritism", "virilisme", 
+    "zionisme", "abstraksionisme", "alelomorfisme", "automorfisme", "biologisme", "buddhisme", "darwinisme", "disfenisme", 
+    "etotisisme", "faksionalisme", "fluksmeter", "fu torisme", "halokromisme", "histerospasme", "idealisme", "kemotropisme", 
+    "konfusianisme", "kosmetika", "kristianisme", "lamaran", "maltusianisme", "mesomorfisme", "metamerisme", "monolingualisme", 
+    "multiteisme", "mutamerisme", "mutatisme", "mutirasialisme", "narsisisme", "nazisme 1", "neoklasikisme", "polimetalisme", 
+    "polimorfisme", "postrukturalisme", "premanisme", "radiotropisme", "superorganisme", "vitalisme", "volunterisme", "vulkanisme"
 }
 
 table.sort(wordsDatabase, function(a, b) return #a > #b end)
-StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (LY, CY, GY)."
+StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata akhiran ISME."
 local usedWords = {}
 
 -- [ LOGIKA ITEM & UI ]
@@ -391,7 +408,7 @@ local function doSearch()
     clearResults()
     
     if query == "" then
-        StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (LY, CY, GY)."
+        StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata akhiran ISME."
         ResultList.CanvasSize = UDim2.new(0, 0, 0, 0)
         return
     end
