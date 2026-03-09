@@ -1,5 +1,6 @@
 --[[
-	KAMUS SAMBANG KATA - AKHIRAN ISME (KBBI)
+	kanzXhub - KAMUS SAMBANG KATA LENGKAP
+	Akhiran: X, LY, CY, GY, ISME, EH
 ]]
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
@@ -8,13 +9,13 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 
 local guiParent = pcall(function() return CoreGui.Name end) and CoreGui or Players.LocalPlayer:WaitForChild("PlayerGui")
 
-if guiParent:FindFirstChild("KamusSambangKata") then
-    guiParent.KamusSambangKata:Destroy()
+if guiParent:FindFirstChild("kanzXhub") then
+    guiParent.kanzXhub:Destroy()
 end
 
 -- [ GUI ]
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "KamusSambangKata"
+ScreenGui.Name = "kanzXhub"
 ScreenGui.Parent = guiParent
 ScreenGui.ResetOnSpawn = false
 
@@ -53,7 +54,7 @@ local Title = Instance.new("TextLabel")
 Title.Size = UDim2.new(1, -40, 1, 0)
 Title.Position = UDim2.new(0, 15, 0, 0)
 Title.BackgroundTransparency = 1
-Title.Text = "AKHIRAN ISME (KBBI)"
+Title.Text = "kanzXhub - LENGKAP"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.Font = Enum.Font.GothamBold
 Title.TextSize = 14
@@ -147,7 +148,7 @@ local StatusLabel = Instance.new("TextLabel")
 StatusLabel.Size = UDim2.new(1, -30, 0, 20)
 StatusLabel.Position = UDim2.new(0, 15, 0, 142)
 StatusLabel.BackgroundTransparency = 1
-StatusLabel.Text = "Memuat kata akhiran ISME..."
+StatusLabel.Text = "Memuat kata lengkap..."
 StatusLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
 StatusLabel.Font = Enum.Font.Gotham
 StatusLabel.TextSize = 12
@@ -252,8 +253,32 @@ local function simulateTyping(word)
     end
 end
 
--- [ DATABASE AKHIRAN ISME (KBBI) - LENGKAP ]
+-- [ DATABASE LENGKAP - AKHIRAN X, LY, CY, GY, ISME, EH ]
 local wordsDatabase = {
+    -- AKHIRAN X (58 kata)
+    "bordeaux", "lex", "sphinx", "unisex", "bodrex", "komix", "gallierex", "addax", 
+    "aframax", "apterix", "bombyx", "caloperdrix", "caranx", "caronx", "chalcococyx", 
+    "chx", "cimex", "circumfix", "coix", "confix", "cyathocalyx", "donax", "echinosorex", 
+    "forex", "helix", "hystrix", "ilex", "index", "lux", "marx", "max", "melanoperdix", 
+    "meritrix", "microhierax", "molitrix", "murex", "mystax", "naiasptatrix", "natrix", 
+    "nephotettix", "nephottotix", "ninox", "nontax", "nothopanax", "nycticorax", "offax", 
+    "olfax", "ex", "prix", "annex", "croix", "deux", "complex", "ix", "hapax", "rex", 
+    "klux", "mantoux", "box", "vox",
+    
+    -- AKHIRAN LY (16 kata)
+    "assertedly", "billy", "bily", "diddly", "disproportionally", "errorlessly", 
+    "expansively", "neighbourly", "overabundantly", "piddly", "resumply", "retailly", 
+    "sandfly", "secondly", "separably", "westwardly",
+    
+    -- AKHIRAN CY (11 kata)
+    "arrogancy", "corpulency", "delegitmacy", "excellency", "incompetency", "nonlegitmacy", 
+    "supremacy", "prodemocracy", "recalcitracy", "insurgency", "verdancy",
+    
+    -- AKHIRAN GY (8 kata)
+    "anaesthesiology", "buggy", "cosmology", "oceanology", "paleontropology", 
+    "pathology", "seismology", "otourology",
+    
+    -- AKHIRAN ISME (400+ kata)
     "isisme", "absenteisme", "absolutisme", "absurdisme", "aforisme", "agnostisisme", "aktivisme", 
     "albinisme", "alkoholisme", "alomerisme", "altruisme", "amatirisme", "amensalisme", "amfibolisme", "anabolisme", 
     "anakronisme", "anarkisme", "aneurisme", "animisme", "antagonisme", "antisemitisme", "antropomorfisme", "antroposentrisme", 
@@ -282,11 +307,27 @@ local wordsDatabase = {
     "etotisisme", "faksionalisme", "fluksmeter", "fu torisme", "halokromisme", "histerospasme", "idealisme", "kemotropisme", 
     "konfusianisme", "kosmetika", "kristianisme", "lamaran", "maltusianisme", "mesomorfisme", "metamerisme", "monolingualisme", 
     "multiteisme", "mutamerisme", "mutatisme", "mutirasialisme", "narsisisme", "nazisme 1", "neoklasikisme", "polimetalisme", 
-    "polimorfisme", "postrukturalisme", "premanisme", "radiotropisme", "superorganisme", "vitalisme", "volunterisme", "vulkanisme"
+    "polimorfisme", "postrukturalisme", "premanisme", "radiotropisme", "superorganisme", "vitalisme", "volunterisme", "vulkanisme",
+    
+    -- AKHIRAN EH (150+ kata)
+    "baris", "batang", "beha", "behandel", "behena", "behina", "bengkung", "benih", "benteh", "bentes", 
+    "boleh", "bongmeh", "boreh", "bunga", "ceceh", "celekeh", "celoteh", "cemeeh", "cemeh", "cengeh", 
+    "cengkeh", "ceroteh", "cingkeh", "congeh", "daun", "deceh", "deh", "deham", "dehem", "dehidrasi", 
+    "dehidrat", "dehidrogenasi", "dehumanisasi", "didik", "dokoh", "doktor", "ehe", "ekeh", "enceh", 
+    "ereh", "fotografi", "gapura", "gelar", "gereh", "geryeh", "gonyeh", "greha", "grehon", "gunting", 
+    "habis", "hadap", "hadir", "haji", "hakim", "halal", "haluan", "halus", "hambar", "hamil", "hampa", 
+    "hampar", "hancur", "hangat", "hangus", "hari", "harmonis", "haru", "harum", "harus", "hasrat", 
+    "hasta", "hati", "haus", "hebat", "heboh", "helai", "hemat", "hendak", "hening", "heran", "heroik", 
+    "heterogen", "hewan", "hibuk", "hidang", "hidup", "hijau", "hilang", "hilir", "hina", "hiponim", 
+    "hitam", "homofon", "homogen", "homograf", "homomim", "hormat", "hujan", "hujung", "hukum", "humas", 
+    "hutan", "ilmu", "indehoi", "instalasi", "jamu", "jelajeh", "jurang", "kaidah", "kalang", "kambeh", 
+    "kancah", "kanceh", "karat", "kareseh", "kawal", "kayu", "kehel", "kekeh", "keleseh", "keloceh", 
+    "kepik", "keras", "ketua", "kokleh", "komprehensif", "kondisi", "kreseh", "kurun", "kutuk", "larut", 
+    "leceh"
 }
 
 table.sort(wordsDatabase, function(a, b) return #a > #b end)
-StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata akhiran ISME."
+StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (X, LY, CY, GY, ISME, EH)."
 local usedWords = {}
 
 -- [ LOGIKA ITEM & UI ]
@@ -408,7 +449,7 @@ local function doSearch()
     clearResults()
     
     if query == "" then
-        StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata akhiran ISME."
+        StatusLabel.Text = "Kamus Aktif: " .. tostring(#wordsDatabase) .. " kata (X, LY, CY, GY, ISME, EH)."
         ResultList.CanvasSize = UDim2.new(0, 0, 0, 0)
         return
     end
